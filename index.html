@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A 90-day learning tracker for becoming a Forward Deployed Engineer.">
+  <title>FDE 90-Day Learning Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menuToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar">
+        <span aria-hidden="true">&#9776;</span>
+      </button>
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">FDE</span>
+        <span class="brand-name">90-Day Learning Tracker</span>
+      </div>
+      <div class="topbar-actions">
+        <label class="search-wrap" for="globalSearch">
+          <span aria-hidden="true">&#128269;</span>
+          <input type="search" id="globalSearch" placeholder="Search topics..." autocomplete="off">
+        </label>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch to light theme" title="Toggle theme">
+          <span id="themeIcon" aria-hidden="true">&#9789;</span>
+        </button>
+      </div>
+    </header>
+
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <nav>
+        <ul class="nav-list" id="navList">
+          <li><button class="nav-item active" type="button" data-section="dashboard"><span aria-hidden="true">&#9634;</span> Dashboard</button></li>
+          <li><button class="nav-item" type="button" data-section="roadmap"><span aria-hidden="true">&#9678;</span> 90-Day Roadmap</button></li>
+          <li><button class="nav-item" type="button" data-section="daily"><span aria-hidden="true">&#9744;</span> Daily Tasks</button></li>
+          <li><button class="nav-item" type="button" data-section="projects"><span aria-hidden="true">&#9670;</span> Projects</button></li>
+          <li><button class="nav-item" type="button" data-section="notes"><span aria-hidden="true">&#9998;</span> Learning Notes</button></li>
+          <li><button class="nav-item" type="button" data-section="resources"><span aria-hidden="true">&#128218;</span> Resources</button></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="side-stat">
+          <span>Journey</span>
+          <strong id="sideProgress">0%</strong>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="sideProgressFill" style="width:0%"></div></div>
+        <p class="side-days"><span id="sideCompletedDays">0</span> of 90 days complete</p>
+      </div>
+    </aside>
+
+    <main class="main" id="main-content">
+      <!-- DASHBOARD -->
+      <section class="view active" id="view-dashboard" aria-labelledby="dashboardTitle">
+        <div class="view-header">
+          <div>
+            <p class="eyebrow">Overview</p>
+            <h1 id="dashboardTitle">Dashboard</h1>
+            <p class="subtle">Path from backend engineer to Forward Deployed Engineer &middot; <strong class="active-learner" id="activeLearnerLabel">Naga</strong></p>
+          </div>
+          <div class="header-tools">
+            <div class="profile-switcher" role="group" aria-label="Learning profile">
+              <button class="profile-tab active" type="button" data-profile="naga" aria-pressed="true">Naga</button>
+              <button class="profile-tab" type="button" data-profile="karthick" aria-pressed="false">Karthick</button>
+            </div>
+            <label class="field inline" for="startDate">
+              <span>Start date</span>
+              <input type="date" id="startDate">
+            </label>
+          </div>
+        </div>
+
+        <div class="card hero-card">
+          <div class="hero-top">
+            <div>
+              <p class="eyebrow">Complete journey &middot; <span id="heroLearner">Naga</span></p>
+              <h2><span id="overallPercent">0</span>% complete</h2>
+            </div>
+            <div class="hero-badge"><span id="currentDayLabel">Day 1</span> &middot; <span id="currentPhaseLabel">Phase 1</span></div>
+          </div>
+          <div class="progress-track large"><div class="progress-fill" id="overallProgressFill" style="width:0%"></div></div>
+          <p class="subtle"><span id="overallSubtasks">0</span> of <span id="totalSubtasks">0</span> subtasks completed</p>
+        </div>
+
+        <div class="stat-grid">
+          <article class="card stat-card"><p class="eyebrow">Completed days</p><p class="stat-value"><span id="statDays">0</span><span class="stat-unit"> / 90</span></p></article>
+          <article class="card stat-card"><p class="eyebrow">Subtasks done</p><p class="stat-value"><span id="statSubtasks">0</span><span class="stat-unit"> / <span id="statSubtotal">0</span></span></p></article>
+          <article class="card stat-card"><p class="eyebrow">Current phase</p><p class="stat-text" id="statPhase">&mdash;</p></article>
+          <article class="card stat-card"><p class="eyebrow">Current learning day</p><p class="stat-value" id="statDay">1</p></article>
+          <article class="card stat-card"><p class="eyebrow">Remaining days</p><p class="stat-value" id="statRemaining">90</p></article>
+          <article class="card stat-card"><p class="eyebrow">Daily study target</p><p class="stat-text">3&ndash;4 hours</p></article>
+          <article class="card stat-card"><p class="eyebrow">Project milestones</p><p class="stat-value"><span id="statProjects">0</span><span class="stat-unit"> / <span id="statProjectTotal">0</span></span></p></article>
+        </div>
+
+        <div class="two-col">
+          <article class="card">
+            <div class="card-header"><h2>Current focus</h2><button class="text-btn" type="button" data-goto-section="daily">Open day &rarr;</button></div>
+            <div id="currentFocus"></div>
+          </article>
+          <article class="card">
+            <div class="card-header"><h2>Weekly summary</h2><span class="pill" id="weekLabel">Week 1</span></div>
+            <div id="weeklySummary"></div>
+          </article>
+        </div>
+
+        <div class="two-col">
+          <article class="card">
+            <div class="card-header"><h2>Upcoming project milestones</h2></div>
+            <div id="dashboardMilestones"></div>
+          </article>
+          <article class="card">
+            <div class="card-header"><h2>Data &amp; settings</h2></div>
+            <p class="subtle small">Progress is saved automatically in this browser. Export a backup any time.</p>
+            <div class="button-row">
+              <button class="btn primary" type="button" id="exportBtn">Export JSON</button>
+              <button class="btn" type="button" id="importBtn">Import JSON</button>
+              <button class="btn danger" type="button" id="resetBtn">Reset progress</button>
+            </div>
+            <input type="file" id="importFile" accept="application/json,.json" hidden>
+          </article>
+        </div>
+
+        <article class="card comparison-card">
+          <div class="card-header"><h2>Profile comparison</h2><span class="pill">Read-only</span></div>
+          <div id="profileComparison"></div>
+        </article>
+      </section>
+
+      <!-- DAILY TASKS -->
+      <section class="view" id="view-daily" aria-labelledby="dailyTitle">
+        <div class="view-header">
+          <div>
+            <p class="eyebrow">Daily learning</p>
+            <h1 id="dailyTitle">Daily Tasks</h1>
+            <p class="subtle" id="dailyMeta">Work through one focused day at a time.</p>
+          </div>
+          <div class="day-nav">
+            <button class="btn" type="button" id="prevDay">&larr; Previous</button>
+            <label class="field inline" for="daySelect"><span>Day</span>
+              <select id="daySelect"></select>
+            </label>
+            <button class="btn" type="button" id="nextDay">Next &rarr;</button>
+          </div>
+        </div>
+        <div id="dayDetail"></div>
+      </section>
+
+      <!-- ROADMAP -->
+      <section class="view" id="view-roadmap" aria-labelledby="roadmapTitle">
+        <div class="view-header">
+          <div>
+            <p class="eyebrow">Curriculum</p>
+            <h1 id="roadmapTitle">90-Day Roadmap</h1>
+            <p class="subtle">Six phases, 90 days. Expand a phase and open any day.</p>
+          </div>
+          <div class="button-row">
+            <button class="btn" type="button" id="expandAll">Expand all</button>
+            <button class="btn" type="button" id="collapseAll">Collapse all</button>
+          </div>
+        </div>
+        <div id="roadmap"></div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section class="view" id="view-projects" aria-labelledby="projectsTitle">
+        <div class="view-header">
+          <div>
+            <p class="eyebrow">Portfolio</p>
+            <h1 id="projectsTitle">Projects</h1>
+            <p class="subtle">Three portfolio builds that prove your FDE skills.</p>
+          </div>
+        </div>
+        <div id="projects"></div>
+      </section>
+
+      <!-- NOTES -->
+      <section class="view" id="view-notes" aria-labelledby="notesTitle">
+        <div class="view-header">
+          <div>
+            <p class="eyebrow">Reflection</p>
+            <h1 id="notesTitle">Learning Notes</h1>
+            <p class="subtle">Notes save automatically as you type and are scoped to the selected day.</p>
+          </div>
+          <label class="field inline" for="notesDay"><span>Day</span><select id="notesDay"></select></label>
+        </div>
+        <div class="notes-grid">
+          <label class="card note-card" for="noteDaily">
+            <span class="note-title">Daily notes</span>
+            <textarea id="noteDaily" rows="8" placeholder="What did you learn today?"></textarea>
+          </label>
+          <label class="card note-card" for="noteConcepts">
+            <span class="note-title">Important concepts</span>
+            <textarea id="noteConcepts" rows="8" placeholder="Concepts worth remembering..."></textarea>
+          </label>
+          <label class="card note-card" for="noteChallenges">
+            <span class="note-title">Challenges encountered</span>
+            <textarea id="noteChallenges" rows="8" placeholder="What was difficult?"></textarea>
+          </label>
+          <label class="card note-card" for="noteQuestions">
+            <span class="note-title">Questions for revision</span>
+            <textarea id="noteQuestions" rows="8" placeholder="What do you still need to figure out?"></textarea>
+          </label>
+        </div>
+        <p class="save-status" id="notesStatus" role="status" aria-live="polite">All changes saved.</p>
+      </section>
+
+      <!-- RESOURCES -->
+      <section class="view" id="view-resources" aria-labelledby="resourcesTitle">
+        <div class="view-header">
+          <div>
+            <p class="eyebrow">Reference</p>
+            <h1 id="resourcesTitle">Resources</h1>
+            <p class="subtle">Official documentation and guides used throughout the journey.</p>
+          </div>
+        </div>
+        <div id="resources" class="resource-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
